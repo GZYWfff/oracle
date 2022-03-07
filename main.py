@@ -68,7 +68,7 @@ def main():
         model.features = torch.nn.DataParallel(model.features)
         model.cuda()
     else:
-        model = torch.nn.DataParallel(model).cuda()
+        model = model.cuda()
 
     # optionally resume from a checkpoint
     if args.resume:
