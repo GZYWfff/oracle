@@ -89,6 +89,7 @@ def main():
     #########################
     num_ftrs = model.fc.in_features
     model.fc = nn.Linear(num_ftrs, 3881)
+    model.cuda()
     #########################
 
     # Data loading code
@@ -165,8 +166,8 @@ def train(train_loader, model, criterion, optimizer, epoch):
 
         input = input.cuda()
         target = target.cuda(non_blocking=True)
-        input_var = torch.autograd.Variable(input)
-        target_var = torch.autograd.Variable(target)
+        input_var = torch.autograd.Variable(input).cuda()
+        target_var = torch.autograd.Variable(target).cuda()
 
         # compute output
         output = model(input_var)
