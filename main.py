@@ -86,6 +86,11 @@ def main():
 
     cudnn.benchmark = True
 
+    #########################
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, 3881)
+    #########################
+
     # Data loading code
     traindir = os.path.join(args.data, 'train')
     valdir = os.path.join(args.data, 'val')
