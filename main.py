@@ -71,6 +71,13 @@ def main():
     else:
         model.cuda()
 
+        #########################
+        # 换模型要改这里
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, 3881)
+        model.cuda()
+        #########################
+
     # optionally resume from a checkpoint
     if args.resume:
         if os.path.isfile(args.resume):
@@ -86,12 +93,7 @@ def main():
 
     cudnn.benchmark = True
 
-    #########################
-    #换模型要改这里
-    num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, 3881)
     model.cuda()
-    #########################
 
     # Data loading code
     traindir = os.path.join(args.data, 'train')
