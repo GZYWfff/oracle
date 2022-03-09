@@ -39,7 +39,7 @@ parser.add_argument('--lr', '--learning-rate', default=0.1, type=float,
                     metavar='LR', help='initial learning rate')
 parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
                     help='momentum')
-parser.add_argument('--weight-decay', '--wd', default=5e-4, type=float,
+parser.add_argument('--weight-decay', '--wd', default=1e-4, type=float,
                     metavar='W', help='weight decay (default: 1e-4)')
 parser.add_argument('--print-freq', '-p', default=10, type=int,
                     metavar='N', help='print frequency (default: 10)')
@@ -87,6 +87,7 @@ def main():
     cudnn.benchmark = True
 
     #########################
+    #换模型要改这里
     num_ftrs = model.fc.in_features
     model.fc = nn.Linear(num_ftrs, 3881)
     model.cuda()
@@ -243,10 +244,10 @@ def validate(val_loader, model, criterion):
     return top1.avg
 
 
-def save_checkpoint(state, is_best, filename='../drive/MyDrive/checkpoint.pth.tar'):
+def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
     torch.save(state, filename)
     if is_best:
-        shutil.copyfile(filename, '../drive/MyDrive/model_best.pth.tar')
+        shutil.copyfile(filename, 'model_best.pth.tar')
 
 
 class AverageMeter(object):
