@@ -170,7 +170,7 @@ class Inception3(nn.Module):
         self.Conv2d_2b_3x3 = conv_block(32, 64, kernel_size=3, padding=1)
 
          #! 网络的第一层加入注意力机制
-        self.ca = ChannelAttention(self.inplanes)
+        self.ca = ChannelAttention(self.in_planes)
         self.sa = SpatialAttention()
 
         self.maxpool1 = nn.MaxPool2d(kernel_size=3, stride=2)
@@ -192,7 +192,7 @@ class Inception3(nn.Module):
         self.Mixed_7b = inception_e(1280)
         self.Mixed_7c = inception_e(2048)
         #! 网络的卷积层的最后一层加入注意力机制
-        self.ca1 = ChannelAttention(self.inplanes)
+        self.ca1 = ChannelAttention(self.in_planes)
         self.sa1 = SpatialAttention()
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.dropout = nn.Dropout()
