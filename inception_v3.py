@@ -693,6 +693,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
 
         # compute output
         output = model(input_var)
+        output = output.ToTensor()
         loss = criterion(output, target_var)
 
         # measure accuracy and record loss
@@ -738,6 +739,7 @@ def validate(val_loader, model, criterion):
 
         # compute output
         output = model(input_var)
+        output = output.ToTensor()
         loss = criterion(output, target_var)
 
         # measure accuracy and record loss
