@@ -739,7 +739,6 @@ def validate(val_loader, model, criterion):
 
         # compute output
         output = model(input_var)
-        output = output.logits
         loss = criterion(output, target_var)
 
         # measure accuracy and record loss
