@@ -586,18 +586,7 @@ def main():
     global args, best_prec1
     args = parser.parse_args()
 
-    # # create model
-    # if args.pretrained:
-    #     print("=> using pre-trained model '{}'".format(args.arch))
-    #     model = models.__dict__[args.arch](pretrained=True)
-    # else:
-    #     print("=> creating model '{}'".format(args.arch))
-    #     model = models.__dict__[args.arch]()
 
-    # if args.arch.startswith('alexnet') or args.arch.startswith('vgg'):
-    #     model.features = torch.nn.DataParallel(model.features)
-    #     model.cuda()
-    # else:
     model=inception_v3()
     model.cuda()
 
@@ -633,7 +622,7 @@ def main():
 
     train_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(traindir, transforms.Compose([
-            transforms.RandomResizedCrop(224),
+            transforms.RandomResizedCrop(299),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize,
@@ -643,8 +632,8 @@ def main():
 
     val_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(valdir, transforms.Compose([
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
+            transforms.Resize(299),
+            transforms.CenterCrop(299),
             transforms.ToTensor(),
             normalize,
         ])),
